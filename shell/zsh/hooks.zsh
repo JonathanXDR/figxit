@@ -31,7 +31,6 @@ _figxit_redraw() {
   [[ $state == "$_figxit_last" ]] && return 0
   _figxit_last=$state
   local line="E${_figxit_sep}${CURSOR}${_figxit_sep}${PWD}${_figxit_sep}${BUFFER//$'\n'/$'\x1e'}${_figxit_sep}${COLUMNS} ${LINES}"
-  # zselect only promises room for 2048 bytes, the send low-water mark
   (( $#line * 4 < 2048 )) || () { setopt localoptions nomultibyte; (( $#1 < 2048 )) } "$line" || line=N
   _figxit_send "$line" || _figxit_last=
 }
